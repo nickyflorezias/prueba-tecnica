@@ -1,0 +1,34 @@
+spring:
+  application.name: prueba-tecnica
+  config.import: optional:file:.env[.properties]
+  jpa:
+    hibernate.ddl-auto: validate
+    open-in-view: false
+  sql.init:
+    mode: always
+    schema-locations: classpath:db/schema.sql
+  jackson.time-zone: America/Bogota
+
+# Formato de los registros de la v1: MM-dd HH:mm:ss componente NIVEL mensaje, en hora de Colombia.
+logging:
+  pattern.console: "%d{MM-dd HH:mm:ss, America/Bogota} api %-5level %msg%n"
+  level.com.nicky.pruebatecnica: INFO
+# El secreto sale del .env (variable JWT_SECRET). Sin valor la aplicación no arranca.
+security.jwt.secret: ${JWT_SECRET}
+
+plan:
+  deducible: 350000
+  coaseguro-porcentaje: 15
+  tope-desembolso: 1800000
+  carencia-dias: 90
+
+sedes:
+  "[IPS-0412]":
+    tarifario:
+      "[890201]": { nombre: Consulta de medicina general,       valor: 58700,  complejidad: BAJA }
+      "[890264]": { nombre: Consulta de medicina especializada, valor: 112400, complejidad: BAJA }
+      "[931000]": { nombre: Sesión de terapia física,           valor: 47938,  complejidad: BAJA }
+      "[883101]": { nombre: Resonancia magnética de columna,    valor: 948300, complejidad: ALTA }
+  "[IPS-0188]":
+    tarifario:
+      "[890201]": { nombre: Consulta de medicina general,       valor: 58700,  complejidad: BAJA }
