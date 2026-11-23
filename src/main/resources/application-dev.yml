@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/autorizaciones
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+  sql.init.data-locations: classpath:db/seed-prueba.sql
